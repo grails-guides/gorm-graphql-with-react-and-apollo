@@ -16126,7 +16126,16 @@ function warnOnceInDevelopment(msg, type) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_bootstrap__ = __webpack_require__(165);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Talks__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_apollo__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_apollo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_apollo__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_graphql_tag__ = __webpack_require__(288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_graphql_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_graphql_tag__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  mutation talkCreate($talk: TalkCreate!) { \n    talkCreate(talk: $talk) {\n      id\n      title\n      duration\n    }\n  }\n'], ['\n  mutation talkCreate($talk: TalkCreate!) { \n    talkCreate(talk: $talk) {\n      id\n      title\n      duration\n    }\n  }\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  mutation talkDelete($id: Long!) {\n    talkDelete(id: $id) {\n    error\n  }\n}\n'], ['\n  mutation talkDelete($id: Long!) {\n    talkDelete(id: $id) {\n    error\n  }\n}\n']);
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -16135,6 +16144,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -16157,38 +16168,21 @@ var Speaker = function (_Component) {
 
       _this.setState({ title: '', duration: '' });
 
-      fetch('/talk', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: title, duration: duration, speaker: { id: speaker.id } })
-      }).then(function (r) {
-        return r.json();
-      }).then(function (json) {
-        return _this.addTalk(json);
-      }).catch(function (e) {
-        return console.error(e);
+      _this.props.talkCreate({ talk: { title: title, duration: duration, speaker: { id: speaker.id } } }).then(function (_ref) {
+        var data = _ref.data;
+        return console.log('create response:', data);
+      }).catch(function (error) {
+        return console.log('there was an error sending the query', error);
       });
     };
 
     _this.deleteTalk = function (id) {
-      var speaker = _this.props.speaker;
-
-      fetch('/talk/' + id, {
-        method: 'DELETE'
-      }).then(function () {
-        var talks = speaker.talks.filter(function (t) {
-          return t.id !== id;
-        });
-        _this.setState({ talks: talks });
-      }).catch(function (e) {
-        return console.error(e);
+      _this.props.talkDelete({ id: id }).then(function (_ref2) {
+        var data = _ref2.data;
+        return console.log('delete response: ', data);
+      }).catch(function (error) {
+        return console.log('there was an error sending the query', error);
       });
-    };
-
-    _this.addTalk = function (talk) {
-      var talks = _this.state.talks;
-      talks.push(talk);
-      _this.setState({ talks: talks });
     };
 
     _this.handleNewTalkChange = function (event) {
@@ -16205,6 +16199,11 @@ var Speaker = function (_Component) {
     };
     return _this;
   }
+
+  //tag::calling[]
+
+  //end::calling[]
+
 
   _createClass(Speaker, [{
     key: 'render',
@@ -16267,7 +16266,43 @@ var Speaker = function (_Component) {
   return Speaker;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (Speaker);
+//tag::mutations[]
+
+
+var talkCreate = __WEBPACK_IMPORTED_MODULE_4_graphql_tag___default()(_templateObject);
+
+var talkDelete = __WEBPACK_IMPORTED_MODULE_4_graphql_tag___default()(_templateObject2);
+//end::mutations[]
+
+//tag::compose[]
+var SpeakerWithMutations = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_apollo__["compose"])(__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_apollo__["graphql"])(talkCreate, {
+  props: function props(_ref3) {
+    var mutate = _ref3.mutate;
+    return {
+      talkCreate: function talkCreate(_ref4) {
+        var talk = _ref4.talk;
+        return mutate({
+          variables: { talk: talk }
+        });
+      }
+    };
+  }
+}), __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3_react_apollo__["graphql"])(talkDelete, {
+  props: function props(_ref5) {
+    var mutate = _ref5.mutate;
+    return {
+      talkDelete: function talkDelete(_ref6) {
+        var id = _ref6.id;
+        return mutate({
+          variables: { id: id }
+        });
+      }
+    };
+  }
+}))(Speaker);
+
+/* harmony default export */ __webpack_exports__["a"] = (SpeakerWithMutations);
+//end::compose[]
 
 /***/ }),
 /* 211 */
@@ -16283,6 +16318,7 @@ var Speaker = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_graphql_tag___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_graphql_tag__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_whatwg_fetch__ = __webpack_require__(396);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_whatwg_fetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_whatwg_fetch__);
+/* unused harmony export SPEAKER_QUERY */
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['query {\tspeakerList(max: 10) {\n\t  id, firstName, lastName,\n    talks { id title, duration}\n\t} \n}'], ['query {\tspeakerList(max: 10) {\n\t  id, firstName, lastName,\n    talks { id title, duration}\n\t} \n}']);
@@ -16329,7 +16365,7 @@ var SpeakerList = function (_Component) {
 
 var SPEAKER_QUERY = __WEBPACK_IMPORTED_MODULE_3_graphql_tag___default()(_templateObject);
 
-var SpeakerListWithData = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_apollo__["graphql"])(SPEAKER_QUERY, { options: { pollInterval: 5000 } })(SpeakerList);
+var SpeakerListWithData = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2_react_apollo__["graphql"])(SPEAKER_QUERY, { options: { pollInterval: 1000 } })(SpeakerList);
 /* harmony default export */ __webpack_exports__["a"] = (SpeakerListWithData);
 
 /***/ }),

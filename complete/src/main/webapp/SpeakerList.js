@@ -12,11 +12,11 @@ class SpeakerList extends Component {
   }
 }
 
-const SPEAKER_QUERY = gql`query {	speakerList(max: 10) {
+export const SPEAKER_QUERY = gql`query {	speakerList(max: 10) {
 	  id, firstName, lastName,
     talks { id title, duration}
 	} 
 }`;
 
-const SpeakerListWithData = graphql(SPEAKER_QUERY, {options: {pollInterval: 5000}})(SpeakerList);
+const SpeakerListWithData = graphql(SPEAKER_QUERY, {options: {pollInterval: 1000}})(SpeakerList);
 export default SpeakerListWithData;

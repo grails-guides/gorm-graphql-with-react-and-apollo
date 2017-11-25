@@ -12,5 +12,3 @@ queryGraphQL:
   title: Querying GraphQL
 mutations:
   title: Mutations
-runningTheApp:
-  title: Running the App

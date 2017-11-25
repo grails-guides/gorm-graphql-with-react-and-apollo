@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Well} from 'react-bootstrap'
 import Talk from "./Talks";
+import {graphql, compose} from 'react-apollo'
+import gql from 'graphql-tag'
 
 class Speaker extends Component {
 
@@ -13,37 +15,25 @@ class Speaker extends Component {
     }
   }
 
+//tag::calling[]
   addNewTalk = () => {
     const {title, duration} = this.state;
     const {speaker} = this.props;
 
     this.setState({title: '', duration: ''});
 
-    fetch(`/talk`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({title, duration, speaker: {id: speaker.id}})
-    }).then(r => r.json())
-      .then(json => this.addTalk(json))
-      .catch(e => console.error(e));
+    this.props.talkCreate({talk: {title, duration, speaker: {id: speaker.id}}})
+      .then(({data}) => console.log('create response:', data))
+      .catch((error) => console.log('there was an error sending the query', error));
   };
 
   deleteTalk = (id) => {
-    const {speaker} = this.props;
-    fetch(`/talk/${id}`, {
-      method: 'DELETE'
-    }).then(() => {
-      const talks = speaker.talks.filter(t => t.id !== id);
-      this.setState({talks});
-    })
-      .catch(e => console.error(e));
+    this.props.talkDelete({id: id})
+      .then(({data}) => console.log('delete response: ', data))
+      .catch((error) => console.log('there was an error sending the query', error));
   };
+//end::calling[]
 
-  addTalk = (talk) => {
-    let talks = this.state.talks;
-    talks.push(talk);
-    this.setState({talks})
-  };
 
   handleNewTalkChange = (event) => {
     const target = event.target;
@@ -81,7 +71,45 @@ class Speaker extends Component {
   }
 }
 
+//tag::mutations[]
+const talkCreate = gql`
+  mutation talkCreate($talk: TalkCreate!) { 
+    talkCreate(talk: $talk) {
+      id
+      title
+      duration
+    }
+  }
+`;
 
+const talkDelete = gql`
+  mutation talkDelete($id: Long!) {
+    talkDelete(id: $id) {
+    error
+  }
+}
+`;
+//end::mutations[]
 
+//tag::compose[]
+const SpeakerWithMutations = compose(
+  graphql(talkCreate, {
+    props: ({mutate}) => ({
+      talkCreate: ({talk}) =>
+        mutate({
+          variables: {talk},
+        })
+    })
+  }),
+  graphql(talkDelete, {
+    props: ({mutate}) => ({
+      talkDelete: ({id}) =>
+        mutate({
+          variables: {id},
+        })
+    })
+  })
+)(Speaker)
 
-export default Speaker;
+export default SpeakerWithMutations;
+//end::compose[]
