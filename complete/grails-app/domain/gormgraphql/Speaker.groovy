@@ -15,6 +15,7 @@ class Speaker {
     LocalDate birthday
 
     static hasMany = [talks: Talk]
+    static graphql = true
 
     static constraints = {
         email nullable: true, email: true

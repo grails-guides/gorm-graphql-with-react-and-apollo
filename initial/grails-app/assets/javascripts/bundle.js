@@ -9426,6 +9426,7 @@ var Speaker = function (_Component) {
           title = _this$state.title,
           duration = _this$state.duration;
 
+      _this.setState({ title: '', duration: '' });
       fetch('/talk', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

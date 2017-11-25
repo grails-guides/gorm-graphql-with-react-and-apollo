@@ -27,6 +27,7 @@ class Speaker extends Component {
 
   addNewTalk = () => {
     const {title, duration} = this.state;
+    this.setState({title: '', duration: ''});
     fetch(`/talk`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

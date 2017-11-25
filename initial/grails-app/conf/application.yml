@@ -2,7 +2,7 @@
 grails:
     profile: react-webpack
     codegen:
-        defaultPackage: gorm.grqphql.with.react.and.apollo
+        defaultPackage: gormgraphql
     spring:
         transactionManagement:
             proxies: false

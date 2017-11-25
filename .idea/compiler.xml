@@ -5,9 +5,6 @@
       <module name="complete_integrationTest" target="1.8" />
       <module name="complete_main" target="1.8" />
       <module name="complete_test" target="1.8" />
-      <module name="initial_integrationTest" target="1.8" />
-      <module name="initial_main" target="1.8" />
-      <module name="initial_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

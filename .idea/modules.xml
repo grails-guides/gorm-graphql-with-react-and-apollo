@@ -6,11 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/complete/complete_integrationTest.iml" filepath="$PROJECT_DIR$/.idea/modules/complete/complete_integrationTest.iml" group="complete" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/complete/complete_main.iml" filepath="$PROJECT_DIR$/.idea/modules/complete/complete_main.iml" group="complete" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/complete/complete_test.iml" filepath="$PROJECT_DIR$/.idea/modules/complete/complete_test.iml" group="complete" />
-      <module fileurl="file://$PROJECT_DIR$/gorm-grqphql-with-react-and-apollo.iml" filepath="$PROJECT_DIR$/gorm-grqphql-with-react-and-apollo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/initial/initial.iml" filepath="$PROJECT_DIR$/.idea/modules/initial/initial.iml" group="initial" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/initial/initial_integrationTest.iml" filepath="$PROJECT_DIR$/.idea/modules/initial/initial_integrationTest.iml" group="initial" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/initial/initial_main.iml" filepath="$PROJECT_DIR$/.idea/modules/initial/initial_main.iml" group="initial" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/initial/initial_test.iml" filepath="$PROJECT_DIR$/.idea/modules/initial/initial_test.iml" group="initial" />
+      <module fileurl="file://$PROJECT_DIR$/gorm-graphql-with-react-and-apollo.iml" filepath="$PROJECT_DIR$/gorm-graphql-with-react-and-apollo.iml" />
     </modules>
   </component>
 </project>

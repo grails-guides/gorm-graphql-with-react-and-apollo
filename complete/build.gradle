@@ -14,7 +14,7 @@ buildscript {
 }
 
 version "0.1"
-group "gorm.grqphql.with.react.and.apollo"
+group "gormgraphql"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
@@ -54,6 +54,7 @@ dependencies {
     compile "org.grails.plugins:gsp"
     compile "org.grails.plugins:views-json"
     compile "org.grails.plugins:views-json-templates"
+    compile "org.grails.plugins:gorm-graphql:1.0.0.BUILD-SNAPSHOT"
     console "org.grails:grails-console"
     profile "org.grails.profiles:react-webpack"
     runtime "org.glassfish.web:el-impl:2.1.2-b03"
