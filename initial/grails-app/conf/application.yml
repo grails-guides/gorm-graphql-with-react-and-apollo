@@ -84,11 +84,6 @@ grails:
 endpoints:
     jmx:
         unique-names: true
-
----
-# TODO: profile custom configuration
-foo:
-    bar: mysetting
 ---
 hibernate:
     cache:

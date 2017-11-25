@@ -2,7 +2,15 @@ gettingStarted:
   title: Getting Started
   requirements: What you will need
   howto: How to complete the guide
-writingTheApp:
-  title: Writing the Application
+configuringGormGraphQL:
+  title: Configuring GORM for GraphQL
+playGraphQL:
+  title: Playing with the GraphQL browser
+installApollo:
+  title: Install and Configure Apollo
+queryGraphQL:
+  title: Querying GraphQL
+mutations:
+  title: Mutations
 runningTheApp:
-  title: Running the Application
+  title: Running the App

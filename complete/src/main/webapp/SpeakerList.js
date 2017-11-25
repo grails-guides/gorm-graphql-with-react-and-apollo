@@ -1,35 +1,22 @@
 import React, {Component} from 'react'
 import Speaker from "./Speaker";
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
 import 'whatwg-fetch';
 
 class SpeakerList extends Component {
 
-
-  constructor() {
-    super();
-
-    this.state = {
-      speakers: [
-        ]
-    }
-  }
-
-  componentDidMount() {
-    console.log('Fetching speakers...');
-    fetch('/speaker')
-      .then(r => r.json())
-      .then(json => this.setState({speakers: json}))
-      .catch(e => console.error(e));
-  }
-
   render() {
-
-    return  [this.state.speakers.map(s => <Speaker key={s.id} speaker={s} />)]
-
+    const speakers = this.props.data.speakerList;
+    return speakers ? [speakers.map(s => <Speaker key={s.id} speaker={s}/>)] : <p>Loading...</p>
   }
-
 }
 
+const SPEAKER_QUERY = gql`query {	speakerList(max: 10) {
+	  id, firstName, lastName,
+    talks { id title, duration}
+	} 
+}`;
 
-
-export default SpeakerList;
+const SpeakerListWithData = graphql(SPEAKER_QUERY, {options: {pollInterval: 5000}})(SpeakerList);
+export default SpeakerListWithData;
