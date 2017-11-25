@@ -1,7 +1,11 @@
+*/node_modules
+*/.gradle
+*/*.idea
 Thumbs.db
 .DS_Store
 .gradle
-build/
+build
+*/build
 .idea
 *.iml
 *.ipr
