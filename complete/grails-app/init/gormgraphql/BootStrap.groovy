@@ -1,11 +1,12 @@
 package gormgraphql
 
+import groovy.util.logging.Slf4j
 import java.time.LocalDate
 
+@Slf4j
 class BootStrap {
 
     def init = { servletContext ->
-        println "Populating database..."
 
         Speaker jeff = new Speaker(firstName: "Jeff",
                 lastName: "Brown",
@@ -34,6 +35,7 @@ class BootStrap {
         new Talk(title: "GORM Deep Dive", duration: 120, speaker: graeme).save()
         new Talk(title: "What's New in Grails 4", duration: 60, speaker: graeme).save()
         new Talk(title: "Grails in the Wonderful World of JavaScript Frameworks", duration: 90, speaker: zak).save()
+        log.info "Populating database..."
 
     }
     def destroy = {
