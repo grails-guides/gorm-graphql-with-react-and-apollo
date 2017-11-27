@@ -20,4 +20,4 @@ This is where GraphQL shines - it allows consumers of our API, whether private c
 
 image::graphql.png[GraphQL]
 
-Please refer to the excellent documentation and other resources at the https://graphql.org[official GraphQL project website] for more information.
+Please refer to the excellent documentation and other resources at the http://graphql.org[official GraphQL project website] for more information.
