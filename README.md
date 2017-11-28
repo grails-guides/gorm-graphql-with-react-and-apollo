@@ -1,3 +1,5 @@
+# GORM GraphQL with React and Apollo
+
 To build the guide run the following:
 
     ./gradlew publishGuide
