@@ -9,7 +9,7 @@ Now, to generate a GraphQL schema for your domain classes, all that is needed is
 [source, javascript]
 .grails-app/domain/gormgraphql/Talk.groovy
 ----
-include::{sourceDir}/grails-app/domain/gormgraphql/Talk.groovy[indent=0,tag=graphql]
+include::{sourceDir}/grails-app/domain/gormgraphql/Talk.groovy[indent=0]
 ----
 
 If you need to customize the behavior of the GraphQL schema, you can assign the `graphql` property to a custom `GraphQLMapping`, using the DSL provided by the plugin. This is not a requirement for this guide, however a few of the supported options are shown in the `Speaker` domain class.
@@ -18,7 +18,7 @@ If you need to customize the behavior of the GraphQL schema, you can assign the 
 [source, javascript]
 .grails-app/domain/gormgraphql/Speaker.groovy
 ----
-include::{sourceDir}/grails-app/domain/gormgraphql/Speaker.groovy[indent=0,tag=graphql]
+include::{sourceDir}/grails-app/domain/gormgraphql/Speaker.groovy[indent=0]
 ----
 <1> Set property ordering
 <2> Exclude property from the schema
