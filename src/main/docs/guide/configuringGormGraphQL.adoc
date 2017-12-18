@@ -1,8 +1,10 @@
 Install the https://grails.github.io/gorm-graphql/latest/guide/index.html[GORM GraphQL] plugin by adding this line to the `dependencies` section in `build.gradle`:
 
-```
-    compile "org.grails.plugins:gorm-graphql:1.0.0.BUILD-SNAPSHOT"
-```
+[source, javascript]
+.build.gradle
+----
+include::{sourceDir}/build.gradle[indent=0,tag=graphqldependency]
+----
 
 Now, to generate a GraphQL schema for your domain classes, all that is needed is to add a `static graphql` property to the domain class in question. This will cause a GraphQL schema to be generated based on the properties in the domain class, following the constraints specified in the `constraints` block.
 
