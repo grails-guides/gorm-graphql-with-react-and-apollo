@@ -6,7 +6,6 @@ import java.time.LocalDate
 import java.time.Period
 
 @Resource(uri='/speaker')
-//tag::graphql[]
 class Speaker {
 
     String firstName
@@ -42,7 +41,6 @@ class Speaker {
             input false
         }
     }
-    //end::graphql[]
 
     static constraints = {
         email nullable: true, email: true
