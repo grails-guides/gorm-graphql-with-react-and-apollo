@@ -14,5 +14,7 @@ queryGraphQL:
   title: Querying GraphQL
 mutations:
   title: Mutations
+conclusion: 
+  title: Conclusion        
 helpWithGrails:
   title: Help with Grails  
