@@ -3,14 +3,12 @@ package gormgraphql
 import grails.rest.Resource
 
 @Resource(uri='/talk')
-//tag::graphql[]
 class Talk {
 
     String title
     int duration
 
-    static graphql = true
-//end::graphql[]
+    static graphql = true // <1>
 
     static belongsTo = [speaker: Speaker]
 }
