@@ -1,4 +1,4 @@
-Install the GORM GraphQL plugin by adding this line to the `dependencies` section in `build.gradle`:
+Install the https://grails.github.io/gorm-graphql/latest/guide/index.html[GORM GraphQL] plugin by adding this line to the `dependencies` section in `build.gradle`:
 
 ```
     compile "org.grails.plugins:gorm-graphql:1.0.0.BUILD-SNAPSHOT"
