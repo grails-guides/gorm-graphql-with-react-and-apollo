@@ -1,3 +1,5 @@
+training:
+  title: Training
 gettingStarted: 
   title: Getting Started
   requirements: What you will need
@@ -12,3 +14,5 @@ queryGraphQL:
   title: Querying GraphQL
 mutations:
   title: Mutations
+helpWithGrails:
+  title: Help with Grails  
