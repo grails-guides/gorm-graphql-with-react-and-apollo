@@ -8,13 +8,13 @@ Of course, custom mutations can be defined as well - the https://grails.github.i
 
 Our React app already uses REST calls to create and delete talks for a given speaker. Let's replace these REST calls with GraphQL mutations.
 
-Edit `/src/main/webapp/Speaker.js`:
+Edit `/client/src/Speaker.js`:
 
 
 [source, javascript]
-.src/main/webapp/Speaker.js
+./client/src/Speaker.js
 ----
-include::{sourceDir}/src/main/webapp/Speaker.js[indent=0, tag=mutations]
+include::{sourceDir}/client/src/Speaker.js[indent=0, tag=mutations]
 ----
 
 We've defined GraphQL fragments for two mutations, `talkCreate` and `talkDelete`. These fragments specify the inputs required by each mutation, and their types. You can type these mutations into the GraphiQL browser and see their required inputs.
@@ -32,9 +32,9 @@ import gql from 'graphql-tag'
 Now we can use `compose` to bind these mutations to our `Speaker` component.
 
 [source, javascript]
-.src/main/webapp/Speaker.js
+.client/src/Speaker.js
 ----
-include::{sourceDir}/src/main/webapp/Speaker.js[indent=0, tag=compose]
+include::{sourceDir}/client/src/Speaker.js[indent=0, tag=compose]
 ----
 
 NOTE: For more information regarding the use of mutations and `compose`, please refer to https://www.apollographql.com/docs/react/basics/mutations.html[the Apollo documentation].
@@ -42,9 +42,9 @@ NOTE: For more information regarding the use of mutations and `compose`, please 
 The last step is to call our mutations in place of REST calls. Find the `addNewTalk` and `deleteTalk` functions in `Speaker.js`, and edit them as shown below:
 
 [source, javascript]
-.src/main/webapp/Speaker.js
+.client/src/Speaker.js
 ----
-include::{sourceDir}/src/main/webapp/Speaker.js[indent=0, tag=calling]
+include::{sourceDir}/client/src/Speaker.js[indent=0, tag=calling]
 ----
 
 Each of the mutations we've bound to our component are available as functions off of `this.props`: `talkCreate()` and `talkDelete()`. Each function takes a single argument, which is a JavaScript object containing all the parameters required by our mutation. When the mutation resolves, the `then()` function will be called with the data that is returned by the mutation. For this sample, we are simply logging out the data, but you could also use this to update the Apollo cache as https://www.apollographql.com/docs/react/basics/mutations.html#store-updates[described in the documentation].

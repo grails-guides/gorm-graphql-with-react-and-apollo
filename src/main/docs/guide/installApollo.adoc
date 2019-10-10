@@ -10,10 +10,10 @@ Install the necessary packages using either `npm` or `yarn`:
 The first requirement to use Apollo is to configure a *provider*, which will encapsulate the details needed to actual make requests to the GraphQL schema. Edit the file `src/main/webapp/index.js` as shown below:
 
 [source,javascript]
-.src/main/webapp/index.js
+.client/src/index.js
 ----
-include::{sourceDir}/src/main/webapp/index.js[indent=0]
+include::{sourceDir}/client/src/index.js[indent=0]
 ----
 <1> We create an instance of `ApolloClient`, which requires two objects - an `HttpLink` (which represents the URL of the GraphQL schema) and a cache store.
-<2> By default, this client will send queries to the `/graphql` endpoint on the same host - which conveniently happens to be where the GORM GraphQL plugin exposes the GraphQL schema
+<2> This client will send queries to the `${SERVER_URL}/graphql` endpoint - which conveniently happens to be where the GORM GraphQL plugin exposes the GraphQL schema
 <3> Finally, we wrap our `App` component with an `ApolloProvider` component, passing our `ApolloClient` instance as a prop to the latter. Now all child components will be able to query/mutate the GraphQL schema pointed to by the `client`.

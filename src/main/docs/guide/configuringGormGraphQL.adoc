@@ -3,15 +3,15 @@ Install the https://grails.github.io/gorm-graphql/latest/guide/index.html[GORM G
 [source, javascript]
 .build.gradle
 ----
-include::{sourceDir}/build.gradle[indent=0,tag=graphqldependency]
+include::{sourceDir}/server/build.gradle[indent=0,tag=graphqldependency]
 ----
 
 Now, to generate a GraphQL schema for your domain classes, all that is needed is to add a `static graphql` property to the domain class in question. 
 
 [source, javascript]
-.grails-app/domain/gormgraphql/Talk.groovy
+.grails-app/domain/com/objectcomputing/Talk.groovy
 ----
-include::{sourceDir}/grails-app/domain/gormgraphql/Talk.groovy[indent=0]
+include::{sourceDir}/server/grails-app/domain/com/objectcomputing/Talk.groovy[indent=0]
 ----
 
 <1> This will cause a GraphQL schema to be generated based on the properties in the domain class, following the constraints specified in the `constraints` block.
@@ -21,9 +21,9 @@ If you need to customize the behavior of the GraphQL schema, you can assign the 
 
 
 [source, javascript]
-.grails-app/domain/gormgraphql/Speaker.groovy
+.grails-app/domain/com/objectcomputing/Speaker.groovy
 ----
-include::{sourceDir}/grails-app/domain/gormgraphql/Speaker.groovy[indent=0]
+include::{sourceDir}/server/grails-app/domain/com/objectcomputing/Speaker.groovy[indent=0]
 ----
 <1> Set property ordering
 <2> Exclude property from the schema
